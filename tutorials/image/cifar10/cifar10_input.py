@@ -132,7 +132,7 @@ def _generate_image_and_label_batch(image, label, min_queue_examples,
         capacity=min_queue_examples + 3 * batch_size)
 
   # Display the training images in the visualizer.
-  tf.contrib.deprecated.image_summary('images', images)
+  tf.summary.image('images', images)
 
   return images, tf.reshape(label_batch, [batch_size])
 
@@ -237,7 +237,7 @@ def inputs(eval_data, data_dir, batch_size):
   # Image processing for evaluation.
   # Crop the central [height, width] of the image.
   resized_image = tf.image.resize_image_with_crop_or_pad(reshaped_image,
-                                                         width, height)
+                                                         height, width)
 
   # Subtract off the mean and divide by the variance of the pixels.
   float_image = tf.image.per_image_standardization(resized_image)
